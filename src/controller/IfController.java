@@ -12,7 +12,7 @@ public class IfController
 	 */
 	public IfController()
 	{
-
+		userPiano = new Piano();
 	}
 
 	/**
@@ -20,6 +20,8 @@ public class IfController
 	 */
 	public void start()
 	{
+		//loopy();
+
 		String userInput = JOptionPane.showInputDialog(null, "What model is your piano?");
 		userPiano.setBrand(userInput);
 
@@ -36,19 +38,71 @@ public class IfController
 				userPiano.setIsElectric(true);
 				JOptionPane.showMessageDialog(null, "Your piano needs power!");
 				JOptionPane.showMessageDialog(null, "better have an outlet handy");
-				
-			}else if(userInput.equalsIgnoreCase("no") || userInput.equalsIgnoreCase("false"))
+
+			}
+			else if (userInput.equalsIgnoreCase("no") || userInput.equalsIgnoreCase("false"))
 			{
 				approved = true;
 				userPiano.setIsElectric(false);
 				JOptionPane.showMessageDialog(null, "classic");
-				
-			} else 
+
+			}
+			else
 			{
 				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 			}
 		}
+		
+		//userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+		while(!validInt(userInput))
+		{
+			userInput = JOptionPane.showInputDialog(null,"How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+		}
+		userPiano.setNumberOfKeys(Integer.parseInt(userInput));
 
+	}
+
+	private void loopy()
+	{
+		// define a variable before the loop
+		boolean isFinished = false;
+		int someCount = 1;
+
+		// test code
+		while (!isFinished)
+		{
+			// do code
+			//JOptionPane.showMessageDialog(null, "Surprise!");
+
+			
+			switch (someCount)
+			{
+			case 1:
+				JOptionPane.showMessageDialog(null,"someBODY once told me");
+				break;
+			case 2:
+				JOptionPane.showMessageDialog(null, "the world was gonna rule me");
+				break;
+			case 3:
+				JOptionPane.showMessageDialog(null, "She was looking kinda dumb");
+				break;
+			case 4:
+				JOptionPane.showMessageDialog(null, "With her finger and her thumb");
+				break;
+			case 5: 
+				JOptionPane.showMessageDialog(null, "in the shape of an 'L' on her forehead");
+				break;
+			
+			
+			}
+			someCount++;
+			// update test variable
+			if (someCount > 5)
+			{
+				isFinished = true;
+			}
+
+		}
 	}
 
 	public boolean validInt(String maybeInt)
@@ -63,6 +117,21 @@ public class IfController
 		catch (NumberFormatException nope)
 		{
 			JOptionPane.showMessageDialog(null, "Please enter an integer");
+		}
+		return isValid;
+	}
+	
+	public boolean validDouble(String maybeDouble)
+	{
+		boolean isValid = false;
+		try
+		{
+			Double.parseDouble(maybeDouble);
+			isValid = true;
+		}
+		catch (NumberFormatException nope)
+		{
+			JOptionPane.showMessageDialog(null, "Please enter a double");
 		}
 		return isValid;
 	}
