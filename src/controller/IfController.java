@@ -1,7 +1,10 @@
 package controller;
 
-import model.Piano;
+import java.util.Random;
+
 import javax.swing.JOptionPane;
+
+import model.Piano;
 
 public class IfController
 {
@@ -20,7 +23,8 @@ public class IfController
 	 */
 	public void start()
 	{
-		//loopy();
+		loopy();
+		fruitLoop();
 
 		String userInput = JOptionPane.showInputDialog(null, "What model is your piano?");
 		userPiano.setBrand(userInput);
@@ -52,11 +56,11 @@ public class IfController
 				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 			}
 		}
-		
-		//userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
-		while(!validInt(userInput))
+
+		userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+		while (!validInt(userInput))
 		{
-			userInput = JOptionPane.showInputDialog(null,"How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+			userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 		}
 		userPiano.setNumberOfKeys(Integer.parseInt(userInput));
 
@@ -72,37 +76,66 @@ public class IfController
 		while (!isFinished)
 		{
 			// do code
-			//JOptionPane.showMessageDialog(null, "Surprise!");
+			// JOptionPane.showMessageDialog(null, "Surprise!");
 
-			
 			switch (someCount)
 			{
 			case 1:
-				JOptionPane.showMessageDialog(null,"someBODY once told me");
+				JOptionPane.showMessageDialog(null, "someBODY once told me");
 				break;
 			case 2:
 				JOptionPane.showMessageDialog(null, "the world was gonna rule me");
 				break;
 			case 3:
-				JOptionPane.showMessageDialog(null, "She was looking kinda dumb");
+				JOptionPane.showMessageDialog(null, "I ain't the sharpest tool in the shed");
 				break;
 			case 4:
+				JOptionPane.showMessageDialog(null, "She was looking kinda dumb");
+				break;
+			case 5:
 				JOptionPane.showMessageDialog(null, "With her finger and her thumb");
 				break;
-			case 5: 
+			case 6:
 				JOptionPane.showMessageDialog(null, "in the shape of an 'L' on her forehead");
 				break;
-			
-			
+
 			}
 			someCount++;
 			// update test variable
-			if (someCount > 5)
+			if (someCount > 6)
 			{
 				isFinished = true;
 			}
 
 		}
+	}
+
+	private void fruitLoop()
+	{
+		Random coinFlip = new Random();
+		String fruitInput = JOptionPane.showInputDialog(null, "Enter in the word you want to improve");
+		String multiString = fruitInput;
+
+		int spaceNum = fruitInput.length();
+		String outputMulti = "";
+		String changeCase = "";
+		for (int i = 0; i < spaceNum; i++)
+		{
+			changeCase = multiString.substring(i, i + 1);
+			
+			if (coinFlip.nextInt(2) == 0)
+			{
+
+				outputMulti += changeCase.toUpperCase();
+
+			}
+			else
+			{
+				outputMulti += changeCase.toLowerCase();
+			}
+		}
+		JOptionPane.showMessageDialog(null, outputMulti);
+
 	}
 
 	public boolean validInt(String maybeInt)
@@ -120,7 +153,7 @@ public class IfController
 		}
 		return isValid;
 	}
-	
+
 	public boolean validDouble(String maybeDouble)
 	{
 		boolean isValid = false;
