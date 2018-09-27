@@ -25,6 +25,12 @@ public class IfController
 	{
 		loopy();
 		fruitLoop();
+		makePiano();
+
+	}
+	
+	private void makePiano()
+	{
 
 		String userInput = JOptionPane.showInputDialog(null, "What model is your piano?");
 		userPiano.setBrand(userInput);
@@ -48,12 +54,32 @@ public class IfController
 			{
 				approved = true;
 				userPiano.setIsElectric(false);
-				JOptionPane.showMessageDialog(null, "classic");
+				JOptionPane.showMessageDialog(null, "Classic");
 
 			}
 			else
 			{
 				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
+			}
+		}
+		
+		approved = false;
+		userInput = JOptionPane.showInputDialog("Is it a grand piano?");
+		while(!approved)
+		{
+			if(userInput.equalsIgnoreCase("yes") || userInput.equalsIgnoreCase("true"))
+			{
+				approved = true;
+				userPiano.setIsGrand(true);
+			}
+			else if (userInput.equalsIgnoreCase("no") || userInput.equalsIgnoreCase("false"))
+			{
+				approved = true;
+				userPiano.setIsGrand(false);
+			}
+			else
+			{
+				userInput = JOptionPane.showInputDialog(null, "Please answer yes/no or true/false");
 			}
 		}
 
@@ -63,7 +89,6 @@ public class IfController
 			userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 		}
 		userPiano.setNumberOfKeys(Integer.parseInt(userInput));
-
 	}
 
 	private void loopy()

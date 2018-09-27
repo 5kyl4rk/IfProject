@@ -75,12 +75,14 @@ public class Piano
 
 	public void setBrand(String brand)
 	{
-		this.brand = brand;
+		String fixBrand = brand.substring(0,1).toUpperCase() + brand.substring(1,brand.length());
+		this.brand = fixBrand;
 	}
 	
 	public void setColor(String color)
 	{
-		this.color = color;
+		String fixColor = color.substring(0,1).toUpperCase() + color.substring(1,color.length());
+		this.color = fixColor;
 	}
 	
 	public void setIsElectric(boolean electric)
