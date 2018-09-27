@@ -25,8 +25,7 @@ public class IfController
 	{
 		loopy();
 		fruitLoop();
-		makePiano();
-
+		pianoLoop();
 	}
 	
 	private void makePiano()
@@ -35,9 +34,11 @@ public class IfController
 		String userInput = JOptionPane.showInputDialog(null, "What model is your piano?");
 		userPiano.setBrand(userInput);
 
+		
 		userInput = JOptionPane.showInputDialog(null, "What color is it?");
 		userPiano.setColor(userInput);
 
+		
 		userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
 		boolean approved = false;
 		while (!approved)
@@ -60,8 +61,10 @@ public class IfController
 			else
 			{
 				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
+				userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
 			}
 		}
+		
 		
 		approved = false;
 		userInput = JOptionPane.showInputDialog("Is it a grand piano?");
@@ -79,16 +82,35 @@ public class IfController
 			}
 			else
 			{
-				userInput = JOptionPane.showInputDialog(null, "Please answer yes/no or true/false");
+				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
+				userInput = JOptionPane.showInputDialog(null, "Is it a grand piano?");
 			}
 		}
 
+		
 		userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
-		while (!validInt(userInput))
+		approved = false;
+		while (!approved)
 		{
-			userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+			if(validInt(userInput))
+			{
+				if(Integer.parseInt(userInput) > 0)
+				{
+					approved = true;
+					
+				} else 
+				{
+					JOptionPane.showMessageDialog(null, "You can't have no keys!");
+					userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+				}
+			} else 
+			{
+				userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+			}
 		}
 		userPiano.setNumberOfKeys(Integer.parseInt(userInput));
+		
+		JOptionPane.showMessageDialog(null, userPiano);
 	}
 
 	private void loopy()
@@ -101,8 +123,6 @@ public class IfController
 		while (!isFinished)
 		{
 			// do code
-			// JOptionPane.showMessageDialog(null, "Surprise!");
-
 			switch (someCount)
 			{
 			case 1:
@@ -123,36 +143,44 @@ public class IfController
 			case 6:
 				JOptionPane.showMessageDialog(null, "in the shape of an 'L' on her forehead");
 				break;
-
 			}
+			
 			someCount++;
 			// update test variable
 			if (someCount > 6)
 			{
 				isFinished = true;
 			}
-
+		}
+	}
+	
+	private void pianoLoop()
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			makePiano();
 		}
 	}
 
+	
 	private void fruitLoop()
 	{
 		Random coinFlip = new Random();
+		String outputMulti = "";
+		String changeCase = "";
+		
 		String fruitInput = JOptionPane.showInputDialog(null, "Enter in the word you want to improve");
 		String multiString = fruitInput;
 
 		int spaceNum = fruitInput.length();
-		String outputMulti = "";
-		String changeCase = "";
+		
 		for (int i = 0; i < spaceNum; i++)
 		{
 			changeCase = multiString.substring(i, i + 1);
 			
 			if (coinFlip.nextInt(2) == 0)
 			{
-
 				outputMulti += changeCase.toUpperCase();
-
 			}
 			else
 			{
@@ -160,7 +188,6 @@ public class IfController
 			}
 		}
 		JOptionPane.showMessageDialog(null, outputMulti);
-
 	}
 
 	public boolean validInt(String maybeInt)

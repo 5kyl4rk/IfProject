@@ -75,28 +75,46 @@ public class Piano
 
 	public void setBrand(String brand)
 	{
-		String fixBrand = brand.substring(0,1).toUpperCase() + brand.substring(1,brand.length());
+		String fixBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1, brand.length());
 		this.brand = fixBrand;
 	}
-	
+
 	public void setColor(String color)
 	{
-		String fixColor = color.substring(0,1).toUpperCase() + color.substring(1,color.length());
+		String fixColor = color.toLowerCase();
 		this.color = fixColor;
 	}
-	
+
 	public void setIsElectric(boolean electric)
 	{
 		isElectric = electric;
 	}
-	
+
 	public void setIsGrand(boolean grand)
 	{
 		isGrand = grand;
 	}
-	
+
 	public void setNumberOfKeys(int keys)
 	{
 		numberOfKeys = keys;
+	}
+
+	public String toString()
+	{
+		String grand = " piano";
+		String electric = " ";
+		if(isGrand) 
+		{
+			grand = " grand piano";
+		} 
+		if(isElectric)
+		{
+			electric = ", it uses electricity ";
+		}
+		String description = "[" + brand +" piano]\n" + 
+							 "This is a "+ color + grand + electric + 
+							 "and has a whopping " + numberOfKeys +" keys.";
+		return description;
 	}
 }
