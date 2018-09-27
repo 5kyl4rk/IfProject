@@ -32,6 +32,11 @@ public class IfController
 	{
 
 		String userInput = JOptionPane.showInputDialog(null, "What model is your piano?");
+		while(userInput == null || userInput.equals(""))
+		{
+			JOptionPane.showMessageDialog(null, "Please answer the question");
+			userInput = JOptionPane.showInputDialog(null, "What model is your piano?");
+		}
 		userPiano.setBrand(userInput);
 
 		
