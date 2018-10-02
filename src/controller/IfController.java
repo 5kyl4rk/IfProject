@@ -200,7 +200,7 @@ public class IfController
 		for (int i = 0; i < inputBack.length(); i++)
 		{
 			String searchChar = inputBack.substring(i, i + 1);
-			if (searchChar.equalsIgnoreCase("a") || searchChar.equalsIgnoreCase("e") || searchChar.equalsIgnoreCase("i") || searchChar.equalsIgnoreCase("o") || searchChar.equalsIgnoreCase("u"))
+			if (searchChar.equalsIgnoreCase("a") || searchChar.equalsIgnoreCase("e") || searchChar.equalsIgnoreCase("i") || searchChar.equalsIgnoreCase("o") || searchChar.equalsIgnoreCase("u") || searchChar.equalsIgnoreCase("y"))
 			{
 				vowelCount++;
 			}
