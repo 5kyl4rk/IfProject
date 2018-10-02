@@ -23,37 +23,36 @@ public class IfController
 	 */
 	public void start()
 	{
-		loopy();
+		// loopy();
+		loopBack();
 		fruitLoop();
 		pianoLoop();
 	}
-	
+
 	private void makePiano()
 	{
 
 		String userInput = JOptionPane.showInputDialog(null, "What model is your piano?");
-		while(userInput == null || userInput.equals(""))
+		while (userInput == null || userInput.equals(""))
 		{
 			JOptionPane.showMessageDialog(null, "Please answer the question");
 			userInput = JOptionPane.showInputDialog(null, "What model is your piano?");
 		}
 		userPiano.setBrand(userInput);
 
-		
 		userInput = JOptionPane.showInputDialog(null, "What color is it?");
-		while(userInput ==  null || userInput.equals(""))
+		while (userInput == null || userInput.equals(""))
 		{
 			JOptionPane.showMessageDialog(null, "Please answer the question");
-			userInput = JOptionPane.showInputDialog(null,"What color is it?");
+			userInput = JOptionPane.showInputDialog(null, "What color is it?");
 		}
 		userPiano.setColor(userInput);
 
-		
 		userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
 		boolean approved = false;
-		while (!approved )
+		while (!approved)
 		{
-			if(userInput != null && userInput.length() >= 2)
+			if (userInput != null && userInput.length() >= 2)
 			{
 				if (userInput.substring(0, 2).equalsIgnoreCase("ye") || userInput.equalsIgnoreCase("true"))
 				{
@@ -61,9 +60,9 @@ public class IfController
 					userPiano.setIsElectric(true);
 					JOptionPane.showMessageDialog(null, "Your piano needs power!");
 					JOptionPane.showMessageDialog(null, "better have an outlet handy");
-					
+
 				}
-				else if (userInput.substring(0,2).equalsIgnoreCase("no") || userInput.substring(0,2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
+				else if (userInput.substring(0, 2).equalsIgnoreCase("no") || userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
 				{
 					approved = true;
 					userPiano.setIsElectric(false);
@@ -82,20 +81,19 @@ public class IfController
 				userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
 			}
 		}
-		
-		
+
 		approved = false;
 		userInput = JOptionPane.showInputDialog("Is it a grand piano?");
-		while(!approved)
+		while (!approved)
 		{
-			if(userInput != null && userInput.length() >= 2)
+			if (userInput != null && userInput.length() >= 2)
 			{
-				if(userInput.substring(0,2).equalsIgnoreCase("ye") || userInput.equalsIgnoreCase("true"))
+				if (userInput.substring(0, 2).equalsIgnoreCase("ye") || userInput.equalsIgnoreCase("true"))
 				{
 					approved = true;
 					userPiano.setIsGrand(true);
 				}
-				else if (userInput.substring(0,2).equalsIgnoreCase("no") || userInput.substring(0,2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
+				else if (userInput.substring(0, 2).equalsIgnoreCase("no") || userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
 				{
 					approved = true;
 					userPiano.setIsGrand(false);
@@ -111,32 +109,33 @@ public class IfController
 				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 				userInput = JOptionPane.showInputDialog(null, "Is it a grand piano?");
 			}
-				
+
 		}
 
-		
 		userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 		approved = false;
 		while (!approved)
 		{
-			if(validInt(userInput))
+			if (validInt(userInput))
 			{
-				if(Integer.parseInt(userInput) > 0)
+				if (Integer.parseInt(userInput) > 0)
 				{
 					approved = true;
-					
-				} else 
+
+				}
+				else
 				{
 					JOptionPane.showMessageDialog(null, "You can't have no keys!");
 					userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 				}
-			} else 
+			}
+			else
 			{
 				userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 			}
 		}
 		userPiano.setNumberOfKeys(Integer.parseInt(userInput));
-		
+
 		JOptionPane.showMessageDialog(null, userPiano);
 	}
 
@@ -171,7 +170,7 @@ public class IfController
 				JOptionPane.showMessageDialog(null, "in the shape of an 'L' on her forehead");
 				break;
 			}
-			
+
 			someCount++;
 			// update test variable
 			if (someCount > 6)
@@ -180,34 +179,58 @@ public class IfController
 			}
 		}
 	}
-	
+
 	private void pianoLoop()
 	{
-		for(int i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			makePiano();
 		}
 	}
 
-	
+	private void loopBack()
+	{
+		String inputBack = JOptionPane.showInputDialog(null, "Enter a phrase");
+		if(inputBack == null || inputBack.equals(""))
+		{
+			inputBack = "Tony Hawk Pro Skater 4";
+		}
+		int vowelCount = 0;
+		int consonantCount = 0;
+		for (int i = 0; i < inputBack.length(); i++)
+		{
+			String searchChar = inputBack.substring(i, i + 1);
+			if (searchChar.equalsIgnoreCase("a") || searchChar.equalsIgnoreCase("e") || searchChar.equalsIgnoreCase("i") || searchChar.equalsIgnoreCase("o") || searchChar.equalsIgnoreCase("u"))
+			{
+				vowelCount++;
+			}
+			else if (!searchChar.equals(" "))
+			{
+				consonantCount++;
+			}
+		}
+		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount + " consonants in the phrase \"" + inputBack +"\"");
+
+	}
+
 	private void fruitLoop()
 	{
 		Random coinFlip = new Random();
 		String outputMulti = "";
 		String changeCase = "";
-		
+
 		String fruitInput = JOptionPane.showInputDialog(null, "Enter in the word you want to improve");
 		String multiString = fruitInput;
-		if(multiString.equals(""))
+		if (fruitInput == null || multiString.equals(""))
 		{
 			multiString = "Are you feeling it now Mr. Krabs?";
 		}
 		int spaceNum = multiString.length();
-		
+
 		for (int i = 0; i < spaceNum; i++)
 		{
 			changeCase = multiString.substring(i, i + 1);
-			
+
 			if (coinFlip.nextInt(2) == 0)
 			{
 				outputMulti += changeCase.toUpperCase() + " ";
