@@ -1,9 +1,8 @@
 package controller;
 
 import java.util.Random;
-
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
 import model.Piano;
 
 public class IfController
@@ -24,6 +23,7 @@ public class IfController
 	public void start()
 	{
 		// loopy();
+		insertLoop();
 		loopBack();
 		fruitLoop();
 		pianoLoop();
@@ -187,6 +187,62 @@ public class IfController
 			makePiano();
 		}
 	}
+	
+	private void lotsOfPiano()
+	{
+		//Local variable are only visible in the method they are defined in!
+		//They only have SCOPE to that method
+		
+		ArrayList<Piano> myPianos = new ArrayList<Piano>();
+		
+		Piano coolPiano = new Piano();
+		Piano oldPiano = new Piano();
+		
+		myPianos.add(coolPiano);
+		myPianos.add(coolPiano);
+		myPianos.add(oldPiano);
+		
+		//Standard forward loop
+		for (int index = 0; index < myPianos.size(); index += 1)
+		{
+			
+		}
+		
+		//Standard backward loop
+		for(int index = myPianos.size() -1; index >= 0; index -= 1)
+		{
+			
+		}
+		
+		for(Piano current : myPianos)
+		{
+			JOptionPane.showMessageDialog(null, "The piano is named: " + current.getBrand());
+		}
+	}
+	
+	private void insertLoop()
+	{
+		String insertInput = JOptionPane.showInputDialog(null,"Enter a phrase");
+		String originalString = insertInput;
+		
+		boolean approved = false;
+		insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ originalString+"\"\n" + "What do you want to replace?");
+		while(!approved)
+		{
+			for(int index = 0; index < originalString.length(); index++)
+			{
+				if(originalString.substring(index,index + insertInput.length()).equals(insertInput))
+				{
+					approved = true;
+				}
+			}
+			JOptionPane.showMessageDialog(null, "unable to locate");
+			insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ originalString+"\"\n" + "What do you want to replace?");
+		}
+		
+		
+		
+	}
 
 	private void loopBack()
 	{
@@ -227,9 +283,9 @@ public class IfController
 		}
 		int spaceNum = multiString.length();
 
-		for (int i = 0; i < spaceNum; i++)
+		for (int index = 0; index < spaceNum; index++)
 		{
-			changeCase = multiString.substring(i, i + 1);
+			changeCase = multiString.substring(index, index + 1);
 
 			if (coinFlip.nextInt(2) == 0)
 			{
