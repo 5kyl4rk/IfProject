@@ -221,33 +221,124 @@ public class IfController
 	}
 	
 	private void insertLoop()
-	{
-		String insertInput = JOptionPane.showInputDialog(null,"Enter a phrase");
-		String originalString = insertInput;
-		
+	{	
+		String insertInput = JOptionPane.showInputDialog(null,"<WORD REPLACER>\n" + "Enter a phrase");
 		boolean approved = false;
-		insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ originalString+"\"\n" + "What do you want to replace?");
 		while(!approved)
 		{
-			for(int index = 0; index < originalString.length(); index++)
+			//if user closes pop-up, exit method
+			if(insertInput == null)
 			{
-				if(originalString.substring(index,index + insertInput.length()).equals(insertInput))
+				return;
+			}
+			if(insertInput.equals(""))
+			{
+				JOptionPane.showMessageDialog(null, "Please enter something");
+				insertInput = JOptionPane.showInputDialog(null,"<WORD REPLACER>\n" + "Enter a phrase");
+			}
+			else
+			{
+				approved = true;
+			}
+		}
+		String originalString = insertInput;
+		
+		approved = false;
+		//ask what letter/word/phrase should be located
+		insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ originalString+"\"]\n" + "What do you want to replace?");
+		while(!approved)
+		{
+			//null and "" are NOT acceptable inputs
+			if(insertInput == null || insertInput.equals(""))
+			{
+				JOptionPane.showMessageDialog(null, "Please enter something");
+			}
+			//the phrase has to be of equal or less length, other wise the for loop won't work
+			else if(insertInput.length() > originalString.length())
+			{
+				JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: Length exceeded original)");
+			}
+			else
+			{
+				//loop checks to see if the inputed phrase appears at least once
+				for(int index = 0; index <= originalString.length() - insertInput.length(); index++)
 				{
-					approved = true;
+					if(originalString.substring(index,index + insertInput.length()).equals(insertInput))
+					{
+						//if it appears, it's a valid input
+						approved = true;
+					}
+				}
+				//else if it never appears, error message pops up and the user must input again
+				if(!approved)
+				{
+					JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: CaSe SeNsItIvE)");
 				}
 			}
-			JOptionPane.showMessageDialog(null, "unable to locate");
-			insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ originalString+"\"\n" + "What do you want to replace?");
+			if(!approved) 
+			{
+				//if it's not correct, same message pops up and the loop continues
+				insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ originalString+"\"]\n" + "What do you want to replace?");
+			}
+		}	
+		
+		String replacePart = insertInput;
+		
+		
+		approved = false;
+		while(!approved)
+		{
+			insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \""+ originalString+"\"]\n" + "What do you want to replace \"" + replacePart + "\" with?");
+			if(insertInput == null)
+			{
+				JOptionPane.showMessageDialog(null, "Please enter something");
+			}
+			else
+			{
+				approved = true;
+			}
 		}
+		String insertWord = insertInput;
 		
-		
+		String modifiedString = "";//container for new string
+		//loop goes through each space of the original string to see if it should replace it
+		for(int index = 0; index < originalString.length() - replacePart.length() +1; index++)
+		{
+			//if it does have the keyword, it inserts the word to the new string
+			if(originalString.substring(index,index + replacePart.length()).equals(replacePart))
+			{
+				modifiedString += insertWord;
+				//loop will now skip checking the rest of that section as it is already changed
+				index += replacePart.length()-1;
+			}
+			else
+			{	
+				//if index is almost at the end of the loop, then that means there's nothing left to check,so the rest doesn't need to be changed
+				if(index == (originalString.length() - replacePart.length()))
+				{
+					modifiedString += originalString.substring(index,originalString.length());
+				}
+				else
+				{
+					//add letter to modifiedString and move on to the next
+				modifiedString += originalString.substring(index,index + 1);
+				}
+			}
+			
+			
+		}
+		JOptionPane.showMessageDialog(null, modifiedString);
 		
 	}
 
 	private void loopBack()
 	{
-		String inputBack = JOptionPane.showInputDialog(null, "Enter a phrase");
-		if(inputBack == null || inputBack.equals(""))
+		String inputBack = JOptionPane.showInputDialog(null, "[WORD STATS]\n" + "Enter a phrase");
+		if(inputBack == null)
+		{
+			return;
+		}
+		if(inputBack.equals(""))
 		{
 			inputBack = "Tony Hawk Pro Skater 4";
 		}
@@ -275,7 +366,7 @@ public class IfController
 		String outputMulti = "";
 		String changeCase = "";
 
-		String fruitInput = JOptionPane.showInputDialog(null, "Enter in the word you want to improve");
+		String fruitInput = JOptionPane.showInputDialog(null,"</WORD IMPROVER/>\n" + "Enter in the word you want to improve");
 		String multiString = fruitInput;
 		if (fruitInput == null || multiString.equals(""))
 		{
