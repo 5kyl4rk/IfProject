@@ -245,7 +245,7 @@ public class IfController
 		
 		approved = false;
 		//ask what letter/word/phrase should be located
-		insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ fitString(originalString, 140)+"\"]\n" + "What do you want to replace?");
+		insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ fitString(originalString)+"\"]\n" + "What do you want to replace?");
 		while(!approved)
 		{
 			//null and "" are NOT acceptable inputs
@@ -278,7 +278,7 @@ public class IfController
 			if(!approved) 
 			{
 				//if it's not correct, same message pops up and the loop continues
-				insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ fitString(originalString, 140)+"\"]\n" + "What do you want to replace?");
+				insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ fitString(originalString)+"\"]\n" + "What do you want to replace?");
 			}
 		}	
 		
@@ -288,7 +288,7 @@ public class IfController
 		approved = false;
 		while(!approved)
 		{
-			insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \""+ fitString(originalString, 140)+"\"]\n" + "What do you want to replace \"" + fitString(replacePart, 140) + "\" with?");
+			insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \""+ fitString(originalString)+"\"]\n" + "What do you want to replace \"" + fitString(replacePart) + "\" with?");
 			if(insertInput == null)
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
@@ -327,7 +327,7 @@ public class IfController
 			
 			
 		}
-		JOptionPane.showMessageDialog(null, fitString(modifiedString, 140));
+		JOptionPane.showMessageDialog(null, fitString(modifiedString,0,1));
 		
 	}
 
@@ -356,7 +356,7 @@ public class IfController
 				consonantCount++;
 			}
 		}
-		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount + " consonants in the phrase \"" + fitString(inputBack, 140) +"\"");
+		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount + " consonants in the phrase \"" + fitString(inputBack) +"\"");
 
 	}
 
@@ -387,7 +387,7 @@ public class IfController
 				outputMulti += changeCase.toLowerCase() + " ";
 			}
 		}
-		JOptionPane.showMessageDialog(null, fitString(outputMulti, 140));
+		JOptionPane.showMessageDialog(null, fitString(outputMulti));
 	}
 
 	public boolean validInt(String maybeInt)
@@ -421,29 +421,86 @@ public class IfController
 		return isValid;
 	}
 	
+	//method overloading for optional parameters
+	public String fitString(String sample)
+	{
+		return fitString(sample, 140, 0);
+	}
+	
 	public String fitString(String sample, int characterLength)
 	{
+		return fitString(sample, characterLength, 0);
+			
+	}
+	
+	public String fitString(String sample, int characterLength, int splitType)
+	{
 		String smallString = "";
+		String splitString = "";
+		int counter = 0;
+		
+		if(splitType == 1)
+		{
+			splitString = "-\n";//split text with hyphen
+		}
+		else if(splitType == 2)
+		{
+			splitString = "\n";//splits text
+		}
+		else
+		{
+			splitString = "\n";//splits text after word ends
+		}
+		
+		
 		if(characterLength <= 0)
 		{
 			characterLength = 140;
 		}
-		int counter = 0;
+		
 		for(int index = 0; index < sample.length(); index += 1)
 		{
-			if(sample.substring(index, index +1).equals(" ") && counter > characterLength)
+			if(splitType == 1 || splitType == 2)
 			{
-				smallString += "\n";
-				counter = 0;
+				if( counter == characterLength && !sample.substring(index, index +1).equals(" "))
+				{
+					smallString += splitString;
+					counter = 0;
+					smallString += sample.substring(index, index +1);
+				}
+				else if(counter == characterLength && sample.substring(index, index + 1).equals(" "))
+				{
+					smallString += "\n";
+					counter = 0;
+				}
+				else
+				{
+					counter++;
+					smallString += sample.substring(index, index +1);
+				}
+				
+				
 			}
-			else
+			else if(splitType != 1 && splitType != 2)
 			{
-				smallString += sample.substring(index, index +1);
-				counter++;
+				if(sample.substring(index, index +1).equals(" ") && counter > characterLength)
+				{
+					smallString += splitString;
+					counter = 0;
+				}
+				else
+				{
+					smallString += sample.substring(index, index + 1);
+					counter++;
+				}
 			}
+			
 		}
 		
 		return smallString;
 			
 	}
+	
+	
+	
 }
