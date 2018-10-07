@@ -245,7 +245,7 @@ public class IfController
 		
 		approved = false;
 		//ask what letter/word/phrase should be located
-		insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ fitString(originalString)+"\"]\n" + "What do you want to replace?");
+		insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ fitString(originalString, 140)+"\"]\n" + "What do you want to replace?");
 		while(!approved)
 		{
 			//null and "" are NOT acceptable inputs
@@ -278,7 +278,7 @@ public class IfController
 			if(!approved) 
 			{
 				//if it's not correct, same message pops up and the loop continues
-				insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ fitString(originalString)+"\"]\n" + "What do you want to replace?");
+				insertInput = JOptionPane.showInputDialog(null,"[ORIGINAL: \""+ fitString(originalString, 140)+"\"]\n" + "What do you want to replace?");
 			}
 		}	
 		
@@ -288,7 +288,7 @@ public class IfController
 		approved = false;
 		while(!approved)
 		{
-			insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \""+ fitString(originalString)+"\"]\n" + "What do you want to replace \"" + fitString(replacePart) + "\" with?");
+			insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \""+ fitString(originalString, 140)+"\"]\n" + "What do you want to replace \"" + fitString(replacePart, 140) + "\" with?");
 			if(insertInput == null)
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
@@ -327,7 +327,7 @@ public class IfController
 			
 			
 		}
-		JOptionPane.showMessageDialog(null, fitString(modifiedString));
+		JOptionPane.showMessageDialog(null, fitString(modifiedString, 140));
 		
 	}
 
@@ -356,7 +356,7 @@ public class IfController
 				consonantCount++;
 			}
 		}
-		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount + " consonants in the phrase \"" + fitString(inputBack) +"\"");
+		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount + " consonants in the phrase \"" + fitString(inputBack, 140) +"\"");
 
 	}
 
@@ -387,7 +387,7 @@ public class IfController
 				outputMulti += changeCase.toLowerCase() + " ";
 			}
 		}
-		JOptionPane.showMessageDialog(null, fitString(outputMulti));
+		JOptionPane.showMessageDialog(null, fitString(outputMulti, 140));
 	}
 
 	public boolean validInt(String maybeInt)
@@ -421,13 +421,17 @@ public class IfController
 		return isValid;
 	}
 	
-	public String fitString(String sample)
+	public String fitString(String sample, int characterLength)
 	{
 		String smallString = "";
+		if(characterLength <= 0)
+		{
+			characterLength = 140;
+		}
 		int counter = 0;
 		for(int index = 0; index < sample.length(); index += 1)
 		{
-			if(sample.substring(index, index +1).equals(" ") && counter >140)
+			if(sample.substring(index, index +1).equals(" ") && counter > characterLength)
 			{
 				smallString += "\n";
 				counter = 0;
