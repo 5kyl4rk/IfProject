@@ -433,6 +433,20 @@ public class IfController
 			
 	}
 	
+	/**
+	 * Wraps String to fit in column rather than across the screen
+	 * @param sample 
+	 * The String you want to format
+	 * @param characterLength
+	 * How long the String should go for each line
+	 * (Default: 140 characters)
+	 * @param splitType
+	 * Formatting type: 
+	 * 1 = split text with hyphen,
+	 * 2 = splits text with no format,  
+	 * 0 (default) = new line after word ends
+	 * @return String that's vertically arranged
+	 */
 	public String fitString(String sample, int characterLength, int splitType)
 	{
 		String smallString = "";
