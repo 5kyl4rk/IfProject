@@ -23,6 +23,7 @@ public class IfController
 	public void start()
 	{
 		// loopy();
+		//lotsOfPiano();
 		stringList();
 		insertLoop();
 		loopBack();
@@ -201,18 +202,21 @@ public class IfController
 		smashFighter.add("Geno");
 		smashFighter.add("Banjo-Kazooie");
 
-		String roster = "Fighter for Smash Ultimate:\n";
+		String roster = "Fighters for Smash Ultimate:\n";
 		for (int index = 0; index < smashFighter.size(); index++)
 		{
 			if (index > 4)
 			{
 				smashFighter.remove(index);
+				smashFighter.trimToSize();
 			}
 			else
 			{
-			roster += (index + 1) + ".\t" + smashFighter.get(index) + "\n";
+				roster += (index + 1) + ".\t" + smashFighter.get(index) + "\n";
 			}
 		}
+		Random nextFight = new Random();
+		roster += "Next Fight:\t" + smashFighter.get(nextFight.nextInt(smashFighter.size())) + " Vs. " + smashFighter.get(nextFight.nextInt(smashFighter.size()));
 		JOptionPane.showMessageDialog(null, roster);
 
 	}
