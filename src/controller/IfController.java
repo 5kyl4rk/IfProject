@@ -7,6 +7,7 @@ import model.Piano;
 
 public class IfController
 {
+	private ArrayList<Piano> pianoData = new ArrayList<Piano>(3);
 	private Piano userPiano;
 
 	/**
@@ -22,7 +23,7 @@ public class IfController
 	 */
 	public void start()
 	{
-		// loopy();
+		loopy();
 		//lotsOfPiano();
 		stringList();
 		insertLoop();
@@ -30,7 +31,10 @@ public class IfController
 		fruitLoop();
 		pianoLoop();
 	}
-
+	
+	/**
+	 *  builds a piano, asks for the model, color, and keys
+	 */
 	private void makePiano()
 	{
 
@@ -140,7 +144,9 @@ public class IfController
 
 		JOptionPane.showMessageDialog(null, userPiano);
 	}
-
+	/**
+	 * shows useless popups that shows lyrics to the song "All Stars" by Smash Mouth
+	 */
 	private void loopy()
 	{
 		// define a variable before the loop
@@ -181,7 +187,9 @@ public class IfController
 			}
 		}
 	}
-
+	/**
+	 * A loop that repeats the makePiano() call three times, 
+	 */
 	private void pianoLoop()
 	{
 		for (int i = 0; i < 3; i++)
@@ -189,35 +197,49 @@ public class IfController
 			makePiano();
 		}
 	}
-
+	/**
+	 * Practice using ArrayList, makes a list of Smash Bros fighters and deletes and moves fighters not included
+	 */
 	private void stringList()
 	{
-		ArrayList<String> smashFighter = new ArrayList<String>(2);
+		ArrayList<String> smashFighter = new ArrayList<String>(4);
 		smashFighter.add("Mario");
 		smashFighter.add("Link");
 		smashFighter.add("Pikachu");
 		smashFighter.add(1, "Luigi");
 		smashFighter.add("Waluigi");
 		smashFighter.add(4, "Isabelle");
+		smashFighter.add("SANS UNDERTALE?!");
 		smashFighter.add("Geno");
 		smashFighter.add("Banjo-Kazooie");
+		smashFighter.add("Shadow");
+		smashFighter.remove("SANS UNDERTALE?!");
+		
+		ArrayList<String> rejects = new ArrayList<String>();
+		
 
 		String roster = "Fighters for Smash Ultimate:\n";
-		for (int index = 0; index < smashFighter.size(); index++)
+		int counter = 1;
+		for (int index = smashFighter.size()-1; index >= 0; index--)
 		{
 			if (index > 4)
 			{
+				String temp = smashFighter.get(index);
+				rejects.add(temp);
 				smashFighter.remove(index);
-			}
-			else
-			{
-				roster += (index + 1) + ".\t" + smashFighter.get(index) + "\n";
 				
 			}
 		}
+		for(int index = 0; index < smashFighter.size(); index++)
+			{
+				roster += counter + ".\t" + smashFighter.get(index) + "\n";
+				counter++;
+				
+			}
 		Random nextFight = new Random();
 		roster += "Next Fight:\t" + smashFighter.get(nextFight.nextInt(smashFighter.size()-1)) + " Vs. " + smashFighter.get(nextFight.nextInt(smashFighter.size()-1));
 		JOptionPane.showMessageDialog(null, roster);
+		JOptionPane.showMessageDialog(null, "Too bad!\n" + rejects.toString());
 
 	}
 
@@ -259,7 +281,9 @@ public class IfController
 			JOptionPane.showMessageDialog(null, "The piano is named: " + current.getBrand());
 		}
 	}
-
+	/**
+	 * Find and Replace function, enter a word/phrase and replace a selected portion with something else. (I was really bored)
+	 */
 	private void insertLoop()
 	{
 		String insertInput = JOptionPane.showInputDialog(null, "<WORD REPLACER>\n" + "Enter a phrase");
@@ -371,7 +395,9 @@ public class IfController
 		JOptionPane.showMessageDialog(null, fitString(modifiedString, 0, 1));
 
 	}
-
+	/**
+	 * Enter a word/phrase and it will tell you how many vowels an consonants there are (Note: special characters and spaces counts as consonants, needs to be improved)
+	 */
 	private void loopBack()
 	{
 		String inputBack = JOptionPane.showInputDialog(null, "[WORD STATS]\n" + "Enter a phrase");
@@ -401,7 +427,9 @@ public class IfController
 		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount + " consonants in the phrase \"" + fitString(inputBack) + "\"");
 
 	}
-
+	/**
+	 * Enter a word/phrase and it will turn it into a crappy meme
+	 */
 	private void fruitLoop()
 	{
 		Random coinFlip = new Random();
@@ -431,7 +459,11 @@ public class IfController
 		}
 		JOptionPane.showMessageDialog(null, fitString(outputMulti));
 	}
-
+	/**
+	 * Checks to see if input is a valid integer
+	 * @param maybeInt the input you want to check to see if it's an integer
+	 * @return if it is an integer, it will return true, else it returns false
+	 */
 	public boolean validInt(String maybeInt)
 	{
 		boolean isValid = false;
@@ -447,7 +479,11 @@ public class IfController
 		}
 		return isValid;
 	}
-
+	/**
+	 * Checks to see if input is a valid double
+	 * @param maybeInt the input you want to check to see if it's a double
+	 * @return if it is a double, it will return true, else it returns false
+	 */
 	public boolean validDouble(String maybeDouble)
 	{
 		boolean isValid = false;
@@ -464,11 +500,27 @@ public class IfController
 	}
 
 	// method overloading for optional parameters
+	/**
+	 * Wraps String to fit vertically 
+	 * @param sample 
+	 * 		the String you want to format
+	 * @return 
+	 * 		String that is vertically formatted
+	 */
 	public String fitString(String sample)
 	{
 		return fitString(sample, 140, 0);
 	}
-
+	
+	/**
+	 * Wraps String to fit vertically
+	 * @param sample
+	 * 		The String you want to format
+	 * @param characterLength
+	 * 		How many character per line until split (Default: 140 characters)
+	 * @return
+	 * 		String that is vertically formatted 
+	 */
 	public String fitString(String sample, int characterLength)
 	{
 		return fitString(sample, characterLength, 0);
