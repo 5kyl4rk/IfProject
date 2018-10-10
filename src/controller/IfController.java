@@ -208,15 +208,15 @@ public class IfController
 			if (index > 4)
 			{
 				smashFighter.remove(index);
-				smashFighter.trimToSize();
 			}
 			else
 			{
 				roster += (index + 1) + ".\t" + smashFighter.get(index) + "\n";
+				
 			}
 		}
 		Random nextFight = new Random();
-		roster += "Next Fight:\t" + smashFighter.get(nextFight.nextInt(smashFighter.size())) + " Vs. " + smashFighter.get(nextFight.nextInt(smashFighter.size()));
+		roster += "Next Fight:\t" + smashFighter.get(nextFight.nextInt(smashFighter.size()-1)) + " Vs. " + smashFighter.get(nextFight.nextInt(smashFighter.size()-1));
 		JOptionPane.showMessageDialog(null, roster);
 
 	}
