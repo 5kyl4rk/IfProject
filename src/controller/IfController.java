@@ -313,82 +313,137 @@ public class IfController
 		// ask what letter/word/phrase should be located
 		insertInput = JOptionPane.showInputDialog(null,
 				"[ORIGINAL: \"" + fitString(originalString) + "\"]\n" + "What do you want to replace?");
+
 		ArrayList<String> searchList = new ArrayList<String>();
+		boolean onlyOne = true;
 		while (!approved)
 		{
 			// null and "" are NOT acceptable inputs
 			if (insertInput == null || insertInput.equals(""))
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
-			}
-
-			int seperator = 0;
-			int moreWords = 0;
-			boolean onlyOne = true;
-			for (int index = 0; index < insertInput.length(); index++)
+			} else
 			{
-				if (insertInput.substring(index, index + 1).equals("|"))
+				boolean exception = false;
+				int seperator = 0;
+				int wordCount = 0;
+				
+				for (int index = 0; index < insertInput.length(); index++)
 				{
-					onlyOne = false;
-					searchList.add(insertInput.substring(seperator, index));
-					seperator = index + 1;
-					moreWords++;
-				}
-				if (moreWords >= 1 && index == insertInput.length() - 1)
-				{
-					searchList.add(insertInput.substring(seperator, insertInput.length()));
-				}
-			}
-
-			if (onlyOne)
-			{
-				searchList.add(insertInput);
-			}
-			JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nSize: " + searchList.size());
-
-			int approvedWords = 0;
-			for (int element = 0; element < searchList.size(); element++)
-			{
-				String currentWord = searchList.get(element);
-
-				// the phrase has to be of equal or less length, other wise the for loop won't
-				// work
-				if (currentWord.length() > originalString.length())
-				{
-					JOptionPane.showMessageDialog(null,
-							"ERROR: Unable to locate, try again!" + "\n(Hint: Length exceeded original)");
-					element += searchList.size();
-				} else
-				{
-					// loop checks to see if the inputed phrase appears at least once
-					for (int index = 0; index <= originalString.length() - currentWord.length(); index++)
+					if (insertInput.substring(index, index + 1).equals(","))
 					{
-						if (originalString.substring(index, index + currentWord.length()).equals(currentWord))
+						onlyOne = false;
+						searchList.add(insertInput.substring(seperator, index));
+						seperator = index + 1;
+						wordCount++;
+					}
+					if (wordCount > 1 && index == insertInput.length() - 1)
+					{
+						searchList.add(insertInput.substring(seperator, insertInput.length()));
+					}
+				}
+
+				if (onlyOne)
+				{
+					searchList.add(insertInput);
+				}
+				JOptionPane.showMessageDialog(null,
+						"[DEBUG]\n" + searchList.toString() + "\nSize: " + searchList.size());
+
+				int approvedWords = 0;
+				for (int element = 0; element < searchList.size(); element++)
+				{
+					String currentWord = searchList.get(element);
+
+					// the phrase has to be of equal or less length, other wise the for loop won't
+					// work
+					if (currentWord.length() > originalString.length())
+					{
+						JOptionPane.showMessageDialog(null,
+								"ERROR: Unable to locate, try again!" + "\n(Hint: Length exceeded original)");
+						exception = true;
+						element += searchList.size();
+					} else if (currentWord.equals(""))
+					{
+						JOptionPane.showMessageDialog(null,
+								"ERROR: Unable to locate, try again!" + "\n(Hint: Use of special character)");
+						exception = true;
+						element += searchList.size();
+					} else
+					{
+						// loop checks to see if the inputed phrase appears at least once
+						for (int index = 0; index <= originalString.length() - currentWord.length(); index++)
 						{
-							// if it appears, it's a valid input
-							approvedWords++;
-							index += originalString.length();
+							if (originalString.substring(index, index + currentWord.length()).equals(currentWord))
+							{
+								// if it appears, it's a valid input
+								approvedWords++;
+								index += originalString.length();
+							}
 						}
 					}
 				}
+				// else if it never appears, error message pops up and the user must input again
+				if (approvedWords == searchList.size())
+				{
+					approved = true;
+				} else if (!exception)
+				{
+					JOptionPane.showMessageDialog(null,
+							"ERROR: Unable to locate, try again!" + "\n(Hint: CaSe SeNsItIvE)");
+					// JOptionPane.showMessageDialog(null,"[DEBUG]\n" + "Approved words: " +
+					// approvedWords + " != " + searchList.size());
+				}
 			}
-			// else if it never appears, error message pops up and the user must input again
-			if (approvedWords == searchList.size())
-			{
-				approved = true;
-			} else
-			{
-				JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: CaSe SeNsItIvE)");
-				JOptionPane.showMessageDialog(null,
-						"[DEBUG]\n" + "Approved words: " + approvedWords + " != " + searchList.size());
-			}
-
 			if (!approved)
 			{
 				searchList.clear();
 				// if it's not correct, same message pops up and the loop continues
 				insertInput = JOptionPane.showInputDialog(null,
 						fitString("[ORIGINAL: \"" + originalString + "\"]\n" + "What do you want to replace?"));
+			}
+		}
+
+		// sorts list from largest to smallest length
+
+		if (!onlyOne)
+		{
+			boolean ordered = false;
+			int counter = 0;
+			int failCount = 0;
+			while (!ordered)
+			{
+
+				int element = (searchList.size() - 1) - (counter % searchList.size());
+				String current = searchList.get(element);
+				if (searchList.indexOf(current) == 0)
+				{
+					counter++;
+				} else
+				{
+					String next = searchList.get(element - 1);
+					if (current.length() > next.length())
+					{
+						String temp = current;
+						String switchSet = next;
+						searchList.set(element - 1, temp);
+						searchList.set(element, switchSet);
+						counter++;
+					} else
+					{
+						counter++;
+						failCount++;
+					}
+				}
+				JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element
+						+ "\nFailCount: " + failCount);
+				if (failCount == searchList.size())
+				{
+					ordered = true;
+					JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: "
+							+ element + "\nFailCount: " + failCount + "\nORDERED!");
+				}
+
 			}
 		}
 
@@ -407,33 +462,30 @@ public class IfController
 		}
 		String insertWord = insertInput;
 
-		
 		// container for new string
 		// loop goes through each space of the original string to see if it should
 		// replace it
 		String finalString = originalString;
 		for (int element = 0; element < searchList.size(); element++)
-		{	
+		{
 			String replacePart = searchList.get(element);
 			String modifiedString = "";
 			for (int index = 0; index < finalString.length() - replacePart.length() + 1; index++)
 			{
 				// if it does have the keyword, it inserts the word to the new string
-				if (originalString.substring(index, index + replacePart.length()).equals(replacePart))
+				if (finalString.substring(index, index + replacePart.length()).equals(replacePart))
 				{
 					modifiedString += insertWord;
 					// loop will now skip checking the rest of that section as it is already changed
 					index += replacePart.length() - 1;
-				} 
-				else
+				} else
 				{
 					// if index is almost at the end of the String, then that means there's nothing
 					// left to check,so the rest doesn't need to be changed
 					if (index == (finalString.length() - replacePart.length()))
 					{
 						modifiedString += finalString.substring(index, finalString.length());
-					} 
-					else
+					} else
 					{
 						// add letter to modifiedString and move on to the next
 						modifiedString += finalString.substring(index, index + 1);
