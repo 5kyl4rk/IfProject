@@ -237,14 +237,9 @@ public class IfController
 
 		}
 		Random nextFight = new Random();
-<<<<<<< HEAD
 
 		roster += "Next Fight:\t" + smashFighter.get(nextFight.nextInt(smashFighter.size() - 1)) + " Vs. " + smashFighter.get(nextFight.nextInt(smashFighter.size() - 1));
 
-=======
-		roster += "Next Fight:\t" + smashFighter.get(nextFight.nextInt(smashFighter.size() - 1)) + " Vs. "
-				+ smashFighter.get(nextFight.nextInt(smashFighter.size() - 1));
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 		JOptionPane.showMessageDialog(null, roster);
 		JOptionPane.showMessageDialog(null, "Too bad!\n" + rejects.toString());
 
@@ -318,18 +313,11 @@ public class IfController
 
 		approved = false;
 		// ask what letter/word/phrase should be located
-<<<<<<< HEAD
 
 		insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \"" + fitString(originalString) + "\"]\n" + "What do you want to replace?");
 
 		ArrayList<String> searchList = new ArrayList<String>();//list stores all words to look for
 
-=======
-		insertInput = JOptionPane.showInputDialog(null,
-				"[ORIGINAL: \"" + fitString(originalString) + "\"]\n" + "What do you want to replace?");
-
-		ArrayList<String> searchList = new ArrayList<String>();
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 		boolean onlyOne = true;
 		while (!approved)
 		{
@@ -337,7 +325,6 @@ public class IfController
 			if (insertInput == null || insertInput.equals(""))
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
-<<<<<<< HEAD
 
 			}
 			else
@@ -411,77 +398,6 @@ public class IfController
 				{
 					JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: CaSe SeNsItIvE)");
 
-=======
-			} else
-			{
-				boolean exception = false;
-				int seperator = 0;
-				int wordCount = 0;
-				
-				for (int index = 0; index < insertInput.length(); index++)
-				{
-					if (insertInput.substring(index, index + 1).equals(","))
-					{
-						onlyOne = false;
-						searchList.add(insertInput.substring(seperator, index));
-						seperator = index + 1;
-						wordCount++;
-					}
-					if (wordCount > 1 && index == insertInput.length() - 1)
-					{
-						searchList.add(insertInput.substring(seperator, insertInput.length()));
-					}
-				}
-
-				if (onlyOne)
-				{
-					searchList.add(insertInput);
-				}
-				JOptionPane.showMessageDialog(null,
-						"[DEBUG]\n" + searchList.toString() + "\nSize: " + searchList.size());
-
-				int approvedWords = 0;
-				for (int element = 0; element < searchList.size(); element++)
-				{
-					String currentWord = searchList.get(element);
-
-					// the phrase has to be of equal or less length, other wise the for loop won't
-					// work
-					if (currentWord.length() > originalString.length())
-					{
-						JOptionPane.showMessageDialog(null,
-								"ERROR: Unable to locate, try again!" + "\n(Hint: Length exceeded original)");
-						exception = true;
-						element += searchList.size();
-					} else if (currentWord.equals(""))
-					{
-						JOptionPane.showMessageDialog(null,
-								"ERROR: Unable to locate, try again!" + "\n(Hint: Use of special character)");
-						exception = true;
-						element += searchList.size();
-					} else
-					{
-						// loop checks to see if the inputed phrase appears at least once
-						for (int index = 0; index <= originalString.length() - currentWord.length(); index++)
-						{
-							if (originalString.substring(index, index + currentWord.length()).equals(currentWord))
-							{
-								// if it appears, it's a valid input
-								approvedWords++;
-								index += originalString.length();
-							}
-						}
-					}
-				}
-				// else if it never appears, error message pops up and the user must input again
-				if (approvedWords == searchList.size())
-				{
-					approved = true;
-				} else if (!exception)
-				{
-					JOptionPane.showMessageDialog(null,
-							"ERROR: Unable to locate, try again!" + "\n(Hint: CaSe SeNsItIvE)");
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 					// JOptionPane.showMessageDialog(null,"[DEBUG]\n" + "Approved words: " +
 					// approvedWords + " != " + searchList.size());
 				}
@@ -490,7 +406,6 @@ public class IfController
 			{
 				searchList.clear();
 				// if it's not correct, same message pops up and the loop continues
-<<<<<<< HEAD
 				insertInput = JOptionPane.showInputDialog(null, fitString("[ORIGINAL: \"" + originalString + "\"]\n" + "What do you want to replace?"));
 			}
 		}
@@ -499,15 +414,6 @@ public class IfController
 		// sorts list from largest to smallest length
 
 
-=======
-				insertInput = JOptionPane.showInputDialog(null,
-						fitString("[ORIGINAL: \"" + originalString + "\"]\n" + "What do you want to replace?"));
-			}
-		}
-
-		// sorts list from largest to smallest length
-
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 		if (!onlyOne)
 		{
 			boolean ordered = false;
@@ -518,15 +424,8 @@ public class IfController
 
 				int element = (searchList.size() - 1) - (counter % searchList.size());
 				String current = searchList.get(element);
-<<<<<<< HEAD
 
 				if (searchList.indexOf(current) != 0)
-=======
-				if (searchList.indexOf(current) == 0)
-				{
-					counter++;
-				} else
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 				{
 					String next = searchList.get(element - 1);
 					if (current.length() > next.length())
@@ -535,7 +434,6 @@ public class IfController
 						String switchSet = next;
 						searchList.set(element - 1, temp);
 						searchList.set(element, switchSet);
-<<<<<<< HEAD
 						failCount = 0;
 					}
 					else
@@ -543,29 +441,15 @@ public class IfController
 						failCount++;
 					}
 				}
+				
 				counter++;
+				
 				JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element + "\nFailCount: " + failCount);
 				if (failCount == searchList.size())
 				{
 					ordered = true;
 				JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element + "\nFailCount: " + failCount + "\nORDERED!");
 
-=======
-						counter++;
-					} else
-					{
-						counter++;
-						failCount++;
-					}
-				}
-				JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element
-						+ "\nFailCount: " + failCount);
-				if (failCount == searchList.size())
-				{
-					ordered = true;
-					JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: "
-							+ element + "\nFailCount: " + failCount + "\nORDERED!");
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 				}
 
 			}
@@ -574,14 +458,9 @@ public class IfController
 		approved = false;
 		while (!approved)
 		{
-<<<<<<< HEAD
 
 			insertInput = JOptionPane.showInputDialog(null, fitString("[ORIGINAL: \"" + originalString + "\"]\n" + "What do you want to replace \"" + searchList.toString() + "\" with?"));
 
-=======
-			insertInput = JOptionPane.showInputDialog(null, fitString("[ORIGINAL: \"" + originalString + "\"]\n"
-					+ "What do you want to replace \"" + searchList.toString() + "\" with?"));
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 			if (insertInput == null)
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
@@ -608,26 +487,18 @@ public class IfController
 					modifiedString += insertWord;
 					// loop will now skip checking the rest of that section as it is already changed
 					index += replacePart.length() - 1;
-<<<<<<< HEAD
 
 				}
 
-=======
-				} else
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 				{
 					// if index is almost at the end of the String, then that means there's nothing
 					// left to check,so the rest doesn't need to be changed
 					if (index == (finalString.length() - replacePart.length()))
 					{
 						modifiedString += finalString.substring(index, finalString.length());
-<<<<<<< HEAD
 					}
 					else
 
-=======
-					} else
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 					{
 						// add letter to modifiedString and move on to the next
 						modifiedString += finalString.substring(index, index + 1);
@@ -712,12 +583,8 @@ public class IfController
 	/**
 	 * Checks to see if input is a valid integer
 	 * 
-<<<<<<< HEAD
 	 * @param maybeInt
 	 *            the input you want to check to see if it's an integer
-=======
-	 * @param maybeInt the input you want to check to see if it's an integer
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 	 * @return if it is an integer, it will return true, else it returns false
 	 */
 	public boolean validInt(String maybeInt)
@@ -738,12 +605,8 @@ public class IfController
 	/**
 	 * Checks to see if input is a valid double
 	 * 
-<<<<<<< HEAD
 	 * @param maybeInt
 	 *            the input you want to check to see if it's a double
-=======
-	 * @param maybeInt the input you want to check to see if it's a double
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 	 * @return if it is a double, it will return true, else it returns false
 	 */
 	public boolean validDouble(String maybeDouble)
@@ -764,15 +627,11 @@ public class IfController
 	/**
 	 * Wraps String to fit vertically
 	 * 
-<<<<<<< HEAD
 
 	 * @param sample
 	 *            the String you want to format
 	 * @param sample the String you want to format
 
-=======
-	 * @param sample the String you want to format
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 	 * @return String that is vertically formatted
 	 */
 	public String fitString(String sample)
@@ -783,17 +642,11 @@ public class IfController
 	/**
 	 * Wraps String to fit vertically
 	 * 
-<<<<<<< HEAD
 
 	 * @param sample
 	 *            The String you want to format
 	 * @param characterLength
 	 *            How many character per line until split (Default: 140 characters)
-=======
-	 * @param sample          The String you want to format
-	 * @param characterLength How many character per line until split (Default: 140
-	 *                        characters)
->>>>>>> a2aa8f68385d92d27b220b535ffd61368145e3bd
 	 * @return String that is vertically formatted
 	 */
 	public String fitString(String sample, int characterLength)
