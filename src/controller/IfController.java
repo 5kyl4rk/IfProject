@@ -23,17 +23,17 @@ public class IfController
 	 */
 	public void start()
 	{
-		loopy();
-		//lotsOfPiano();
-		stringList();
+		// loopy();
+		// lotsOfPiano();
+		// stringList();
 		insertLoop();
 		loopBack();
 		fruitLoop();
 		pianoLoop();
 	}
-	
+
 	/**
-	 *  builds a piano, asks for the model, color, and keys
+	 * builds a piano, asks for the model, color, and keys
 	 */
 	private void makePiano()
 	{
@@ -67,21 +67,19 @@ public class IfController
 					JOptionPane.showMessageDialog(null, "Your piano needs power!");
 					JOptionPane.showMessageDialog(null, "better have an outlet handy");
 
-				}
-				else if (userInput.substring(0, 2).equalsIgnoreCase("no") || userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
+				} else if (userInput.substring(0, 2).equalsIgnoreCase("no")
+						|| userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
 				{
 					approved = true;
 					userPiano.setIsElectric(false);
 					JOptionPane.showMessageDialog(null, "Classic");
 
-				}
-				else
+				} else
 				{
 					JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 					userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
 				}
-			}
-			else
+			} else
 			{
 				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 				userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
@@ -98,19 +96,17 @@ public class IfController
 				{
 					approved = true;
 					userPiano.setIsGrand(true);
-				}
-				else if (userInput.substring(0, 2).equalsIgnoreCase("no") || userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
+				} else if (userInput.substring(0, 2).equalsIgnoreCase("no")
+						|| userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
 				{
 					approved = true;
 					userPiano.setIsGrand(false);
-				}
-				else
+				} else
 				{
 					JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 					userInput = JOptionPane.showInputDialog(null, "Is it a grand piano?");
 				}
-			}
-			else
+			} else
 			{
 				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 				userInput = JOptionPane.showInputDialog(null, "Is it a grand piano?");
@@ -118,7 +114,8 @@ public class IfController
 
 		}
 
-		userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+		userInput = JOptionPane.showInputDialog(null,
+				"How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 		approved = false;
 		while (!approved)
 		{
@@ -128,22 +125,23 @@ public class IfController
 				{
 					approved = true;
 
-				}
-				else
+				} else
 				{
 					JOptionPane.showMessageDialog(null, "You can't have no keys!");
-					userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+					userInput = JOptionPane.showInputDialog(null,
+							"How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 				}
-			}
-			else
+			} else
 			{
-				userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+				userInput = JOptionPane.showInputDialog(null,
+						"How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 			}
 		}
 		userPiano.setNumberOfKeys(Integer.parseInt(userInput));
 
 		JOptionPane.showMessageDialog(null, userPiano);
 	}
+
 	/**
 	 * shows useless popups that shows lyrics to the song "All Stars" by Smash Mouth
 	 */
@@ -187,8 +185,9 @@ public class IfController
 			}
 		}
 	}
+
 	/**
-	 * A loop that repeats the makePiano() call three times, 
+	 * A loop that repeats the makePiano() call three times,
 	 */
 	private void pianoLoop()
 	{
@@ -197,8 +196,10 @@ public class IfController
 			makePiano();
 		}
 	}
+
 	/**
-	 * Practice using ArrayList, makes a list of Smash Bros fighters and deletes and moves fighters not included
+	 * Practice using ArrayList, makes a list of Smash Bros fighters and deletes and
+	 * moves fighters not included
 	 */
 	private void stringList()
 	{
@@ -214,30 +215,31 @@ public class IfController
 		smashFighter.add("Banjo-Kazooie");
 		smashFighter.add("Shadow");
 		smashFighter.remove("SANS UNDERTALE?!");
-		
+
 		ArrayList<String> rejects = new ArrayList<String>();
-		
 
 		String roster = "Fighters for Smash Ultimate:\n";
 		int counter = 1;
-		for (int index = smashFighter.size()-1; index >= 0; index--)
+		for (int index = smashFighter.size() - 1; index >= 0; index--)
 		{
 			if (index > 4)
 			{
 				String temp = smashFighter.get(index);
 				rejects.add(temp);
 				smashFighter.remove(index);
-				
+
 			}
 		}
-		for(int index = 0; index < smashFighter.size(); index++)
-			{
-				roster += counter + ".\t" + smashFighter.get(index) + "\n";
-				counter++;
-				
-			}
+		for (int index = 0; index < smashFighter.size(); index++)
+		{
+			roster += counter + ".\t" + smashFighter.get(index) + "\n";
+			counter++;
+
+		}
 		Random nextFight = new Random();
-		roster += "Next Fight:\t" + smashFighter.get(nextFight.nextInt(smashFighter.size()-1)) + " Vs. " + smashFighter.get(nextFight.nextInt(smashFighter.size()-1));
+
+		roster += "Next Fight:\t" + smashFighter.get(nextFight.nextInt(smashFighter.size() - 1)) + " Vs. " + smashFighter.get(nextFight.nextInt(smashFighter.size() - 1));
+
 		JOptionPane.showMessageDialog(null, roster);
 		JOptionPane.showMessageDialog(null, "Too bad!\n" + rejects.toString());
 
@@ -281,8 +283,10 @@ public class IfController
 			JOptionPane.showMessageDialog(null, "The piano is named: " + current.getBrand());
 		}
 	}
+
 	/**
-	 * Find and Replace function, enter a word/phrase and replace a selected portion with something else. (I was really bored)
+	 * Find and Replace function, enter a word/phrase and replace a selected portion
+	 * with something else. (I was really bored)
 	 */
 	private void insertLoop()
 	{
@@ -299,104 +303,216 @@ public class IfController
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
 				insertInput = JOptionPane.showInputDialog(null, "<WORD REPLACER>\n" + "Enter a phrase");
-			}
-			else
+			} else
 			{
 				approved = true;
 			}
 		}
+		
 		String originalString = insertInput;
 
 		approved = false;
 		// ask what letter/word/phrase should be located
+
 		insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \"" + fitString(originalString) + "\"]\n" + "What do you want to replace?");
+
+		ArrayList<String> searchList = new ArrayList<String>();//list stores all words to look for
+
+		boolean onlyOne = true;
 		while (!approved)
 		{
 			// null and "" are NOT acceptable inputs
 			if (insertInput == null || insertInput.equals(""))
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
-			}
-			// the phrase has to be of equal or less length, other wise the for loop won't
-			// work
-			else if (insertInput.length() > originalString.length())
-			{
-				JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: Length exceeded original)");
+
 			}
 			else
 			{
-				// loop checks to see if the inputed phrase appears at least once
-				for (int index = 0; index <= originalString.length() - insertInput.length(); index++)
+				boolean exception = false;//catches errors to stop loop from continuing
+				int seperator = 0;
+				int wordCount = 1;//there will always be at least one word 
+
+				for (int index = 0; index < insertInput.length(); index++)
 				{
-					if (originalString.substring(index, index + insertInput.length()).equals(insertInput))
+					if (insertInput.substring(index, index + 1).equals(","))
 					{
-						// if it appears, it's a valid input
-						approved = true;
+						onlyOne = false;
+						searchList.add(insertInput.substring(seperator, index));
+						seperator = index + 1;
+						wordCount++;
+					}
+					if (wordCount > 1 && index == insertInput.length() - 1)
+					{
+						searchList.add(insertInput.substring(seperator, insertInput.length()));
 					}
 				}
-				// else if it never appears, error message pops up and the user must input again
-				if (!approved)
+
+				if (onlyOne)
+				{
+					searchList.add(insertInput);
+				}
+
+				// JOptionPane.showMessageDialog(null,"[DEBUG]\n" + searchList.toString() +"\nSize: " + searchList.size());
+
+				int approvedWords = 0;
+				for (int element = 0; element < searchList.size(); element++)//loop repeats for each word in list
+				{
+					String currentWord = searchList.get(element);
+
+					// the phrase has to be of equal or less length, other wise the for loop won't work
+					if (currentWord.length() > originalString.length())
+					{
+						JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: Length exceeded original)");
+						exception = true;
+						element += searchList.size();
+					}
+					else if (currentWord.equals(""))
+					{
+						JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: Use of special character)");
+						exception = true;
+						element += searchList.size();
+
+					}
+					else
+					{
+						// loop checks to see if the word appears at least once
+						for (int index = 0; index <= originalString.length() - currentWord.length(); index++)
+						{
+							if (originalString.substring(index, index + currentWord.length()).equals(currentWord))
+							{
+								// if it appears, it's a valid word
+								approvedWords++;
+								index += originalString.length();
+							}
+						}
+					}
+				}
+			
+				if (approvedWords == searchList.size())//all words have to be approved before
+				{
+					approved = true;
+				}
+
+				else if (!exception)//if none of the previous error are triggered
 				{
 					JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: CaSe SeNsItIvE)");
+
+					// JOptionPane.showMessageDialog(null,"[DEBUG]\n" + "Approved words: " +
+					// approvedWords + " != " + searchList.size());
 				}
 			}
 			if (!approved)
 			{
+				searchList.clear();
 				// if it's not correct, same message pops up and the loop continues
-				insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \"" + fitString(originalString) + "\"]\n" + "What do you want to replace?");
+				insertInput = JOptionPane.showInputDialog(null, fitString("[ORIGINAL: \"" + originalString + "\"]\n" + "What do you want to replace?"));
 			}
 		}
 
-		String replacePart = insertInput;
+		
+		// sorts list from largest to smallest length
+
+
+		if (!onlyOne)
+		{
+			boolean ordered = false;
+			int counter = 0;
+			int failCount = 0;
+			while (!ordered)
+			{
+
+				int element = (searchList.size() - 1) - (counter % searchList.size());
+				String current = searchList.get(element);
+
+				if (searchList.indexOf(current) != 0)
+				{
+					String next = searchList.get(element - 1);
+					if (current.length() > next.length())
+					{
+						String temp = current;
+						String switchSet = next;
+						searchList.set(element - 1, temp);
+						searchList.set(element, switchSet);
+						failCount = 0;
+					}
+					else
+					{
+						failCount++;
+					}
+				}
+				counter++;
+				JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element + "\nFailCount: " + failCount);
+				if (failCount == searchList.size())
+				{
+					ordered = true;
+				JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element + "\nFailCount: " + failCount + "\nORDERED!");
+
+				}
+
+			}
+		}
 
 		approved = false;
 		while (!approved)
 		{
-			insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \"" + fitString(originalString) + "\"]\n" + "What do you want to replace \"" + fitString(replacePart) + "\" with?");
+
+			insertInput = JOptionPane.showInputDialog(null, fitString("[ORIGINAL: \"" + originalString + "\"]\n" + "What do you want to replace \"" + searchList.toString() + "\" with?"));
+
 			if (insertInput == null)
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
-			}
-			else
+			} else
 			{
 				approved = true;
 			}
 		}
 		String insertWord = insertInput;
 
-		String modifiedString = "";// container for new string
+		// container for new string
 		// loop goes through each space of the original string to see if it should
 		// replace it
-		for (int index = 0; index < originalString.length() - replacePart.length() + 1; index++)
+		String finalString = originalString;
+		for (int element = 0; element < searchList.size(); element++)
 		{
-			// if it does have the keyword, it inserts the word to the new string
-			if (originalString.substring(index, index + replacePart.length()).equals(replacePart))
+			String replacePart = searchList.get(element);
+			String modifiedString = "";
+			for (int index = 0; index < finalString.length() - replacePart.length() + 1; index++)
 			{
-				modifiedString += insertWord;
-				// loop will now skip checking the rest of that section as it is already changed
-				index += replacePart.length() - 1;
-			}
-			else
-			{
-				// if index is almost at the end of the loop, then that means there's nothing
-				// left to check,so the rest doesn't need to be changed
-				if (index == (originalString.length() - replacePart.length()))
+				// if it does have the keyword, it inserts the word to the new string
+				if (finalString.substring(index, index + replacePart.length()).equals(replacePart))
 				{
-					modifiedString += originalString.substring(index, originalString.length());
-				}
-				else
-				{
-					// add letter to modifiedString and move on to the next
-					modifiedString += originalString.substring(index, index + 1);
-				}
-			}
+					modifiedString += insertWord;
+					// loop will now skip checking the rest of that section as it is already changed
+					index += replacePart.length() - 1;
 
+				}
+
+				{
+					// if index is almost at the end of the String, then that means there's nothing
+					// left to check,so the rest doesn't need to be changed
+					if (index == (finalString.length() - replacePart.length()))
+					{
+						modifiedString += finalString.substring(index, finalString.length());
+					}
+					else
+
+					{
+						// add letter to modifiedString and move on to the next
+						modifiedString += finalString.substring(index, index + 1);
+					}
+				}
+			}
+			finalString = modifiedString;
 		}
-		JOptionPane.showMessageDialog(null, fitString(modifiedString, 0, 1));
+		JOptionPane.showMessageDialog(null, fitString(finalString, 200));
 
 	}
+
 	/**
-	 * Enter a word/phrase and it will tell you how many vowels an consonants there are (Note: special characters and spaces counts as consonants, needs to be improved)
+	 * Enter a word/phrase and it will tell you how many vowels an consonants there
+	 * are (Note: special characters and spaces counts as consonants, needs to be
+	 * improved)
 	 */
 	private void loopBack()
 	{
@@ -414,19 +530,21 @@ public class IfController
 		for (int i = 0; i < inputBack.length(); i++)
 		{
 			String searchChar = inputBack.substring(i, i + 1);
-			if (searchChar.equalsIgnoreCase("a") || searchChar.equalsIgnoreCase("e") || searchChar.equalsIgnoreCase("i") || searchChar.equalsIgnoreCase("o") || searchChar.equalsIgnoreCase("u")
+			if (searchChar.equalsIgnoreCase("a") || searchChar.equalsIgnoreCase("e") || searchChar.equalsIgnoreCase("i")
+					|| searchChar.equalsIgnoreCase("o") || searchChar.equalsIgnoreCase("u")
 					|| searchChar.equalsIgnoreCase("y"))
 			{
 				vowelCount++;
-			}
-			else if (!searchChar.equals(" "))
+			} else if (!searchChar.equals(" "))
 			{
 				consonantCount++;
 			}
 		}
-		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount + " consonants in the phrase \"" + fitString(inputBack) + "\"");
+		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount
+				+ " consonants in the phrase \"" + fitString(inputBack) + "\"");
 
 	}
+
 	/**
 	 * Enter a word/phrase and it will turn it into a crappy meme
 	 */
@@ -436,7 +554,8 @@ public class IfController
 		String outputMulti = "";
 		String changeCase = "";
 
-		String fruitInput = JOptionPane.showInputDialog(null, "</WORD IMPROVER/>\n" + "Enter in the word you want to improve");
+		String fruitInput = JOptionPane.showInputDialog(null,
+				"</WORD IMPROVER/>\n" + "Enter in the word you want to improve");
 		String multiString = fruitInput;
 		if (fruitInput == null || multiString.equals(""))
 		{
@@ -451,17 +570,19 @@ public class IfController
 			if (coinFlip.nextInt(2) == 0)
 			{
 				outputMulti += changeCase.toUpperCase() + " ";
-			}
-			else
+			} else
 			{
 				outputMulti += changeCase.toLowerCase() + " ";
 			}
 		}
 		JOptionPane.showMessageDialog(null, fitString(outputMulti));
 	}
+
 	/**
 	 * Checks to see if input is a valid integer
-	 * @param maybeInt the input you want to check to see if it's an integer
+	 * 
+	 * @param maybeInt
+	 *            the input you want to check to see if it's an integer
 	 * @return if it is an integer, it will return true, else it returns false
 	 */
 	public boolean validInt(String maybeInt)
@@ -472,16 +593,18 @@ public class IfController
 		{
 			Integer.parseInt(maybeInt);
 			isValid = true;
-		}
-		catch (NumberFormatException nope)
+		} catch (NumberFormatException nope)
 		{
 			JOptionPane.showMessageDialog(null, "Please enter an integer");
 		}
 		return isValid;
 	}
+
 	/**
 	 * Checks to see if input is a valid double
-	 * @param maybeInt the input you want to check to see if it's a double
+	 * 
+	 * @param maybeInt
+	 *            the input you want to check to see if it's a double
 	 * @return if it is a double, it will return true, else it returns false
 	 */
 	public boolean validDouble(String maybeDouble)
@@ -491,8 +614,7 @@ public class IfController
 		{
 			Double.parseDouble(maybeDouble);
 			isValid = true;
-		}
-		catch (NumberFormatException nope)
+		} catch (NumberFormatException nope)
 		{
 			JOptionPane.showMessageDialog(null, "Please enter a double");
 		}
@@ -501,25 +623,29 @@ public class IfController
 
 	// method overloading for optional parameters
 	/**
-	 * Wraps String to fit vertically 
-	 * @param sample 
-	 * 		the String you want to format
-	 * @return 
-	 * 		String that is vertically formatted
+	 * Wraps String to fit vertically
+	 * 
+
+	 * @param sample
+	 *            the String you want to format
+	 * @param sample the String you want to format
+
+	 * @return String that is vertically formatted
 	 */
 	public String fitString(String sample)
 	{
 		return fitString(sample, 140, 0);
 	}
-	
+
 	/**
 	 * Wraps String to fit vertically
+	 * 
+
 	 * @param sample
-	 * 		The String you want to format
+	 *            The String you want to format
 	 * @param characterLength
-	 * 		How many character per line until split (Default: 140 characters)
-	 * @return
-	 * 		String that is vertically formatted 
+	 *            How many character per line until split (Default: 140 characters)
+	 * @return String that is vertically formatted
 	 */
 	public String fitString(String sample, int characterLength)
 	{
@@ -530,14 +656,12 @@ public class IfController
 	/**
 	 * Wraps String to fit in column rather than across the screen
 	 * 
-	 * @param sample
-	 *            The String you want to format
-	 * @param characterLength
-	 *            How long the String should go for each line (Default: 140
-	 *            characters)
-	 * @param splitType
-	 *            Formatting type: 1 = split text with hyphen, 2 = splits text with
-	 *            no format, 0 (default) = new line after word ends
+	 * @param sample          The String you want to format
+	 * @param characterLength How long the String should go for each line (Default:
+	 *                        140 characters)
+	 * @param splitType       Formatting type: 1 = split text with hyphen, 2 =
+	 *                        splits text with no format, 0 (default) = new line
+	 *                        after word ends
 	 * @return String that's vertically arranged
 	 */
 	public String fitString(String sample, int characterLength, int splitType)
@@ -549,12 +673,10 @@ public class IfController
 		if (splitType == 1)
 		{
 			splitString = "-\n";// split text with hyphen
-		}
-		else if (splitType == 2)
+		} else if (splitType == 2)
 		{
 			splitString = "\n";// splits text
-		}
-		else
+		} else
 		{
 			splitString = "\n";// splits text after word ends
 		}
@@ -573,27 +695,23 @@ public class IfController
 					smallString += splitString;
 					counter = 0;
 					smallString += sample.substring(index, index + 1);
-				}
-				else if (counter == characterLength && sample.substring(index, index + 1).equals(" "))
+				} else if (counter == characterLength && sample.substring(index, index + 1).equals(" "))
 				{
 					smallString += "\n";
 					counter = 0;
-				}
-				else
+				} else
 				{
 					counter++;
 					smallString += sample.substring(index, index + 1);
 				}
 
-			}
-			else if (splitType != 1 && splitType != 2)
+			} else if (splitType != 1 && splitType != 2)
 			{
 				if (sample.substring(index, index + 1).equals(" ") && counter > characterLength)
 				{
 					smallString += splitString;
 					counter = 0;
-				}
-				else
+				} else
 				{
 					smallString += sample.substring(index, index + 1);
 					counter++;
