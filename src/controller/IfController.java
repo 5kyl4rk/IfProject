@@ -486,7 +486,7 @@ public class IfController
 				{
 					modifiedString += insertWord;
 					// loop will now skip checking the rest of that section as it is already changed
-					index += replacePart.length() - 1;
+					index += replacePart.length();
 
 				}
 
@@ -713,7 +713,8 @@ public class IfController
 				{
 					smallString += splitString;
 					counter = 0;
-				} else
+				}
+				else
 				{
 					smallString += sample.substring(index, index + 1);
 					counter++;
