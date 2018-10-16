@@ -24,12 +24,12 @@ public class IfController
 	public void start()
 	{
 		// loopy();
-		// lotsOfPiano();
-		// stringList();
+		//stringList();
 		insertLoop();
 		loopBack();
 		fruitLoop();
 		pianoLoop();
+		lotsOfPiano();
 	}
 
 	/**
@@ -46,6 +46,7 @@ public class IfController
 		}
 		userPiano.setBrand(userInput);
 
+		
 		userInput = JOptionPane.showInputDialog(null, "What color is it?");
 		while (userInput == null || userInput.equals(""))
 		{
@@ -54,6 +55,7 @@ public class IfController
 		}
 		userPiano.setColor(userInput);
 
+		
 		userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
 		boolean approved = false;
 		while (!approved)
@@ -67,25 +69,22 @@ public class IfController
 					JOptionPane.showMessageDialog(null, "Your piano needs power!");
 					JOptionPane.showMessageDialog(null, "better have an outlet handy");
 
-				} else if (userInput.substring(0, 2).equalsIgnoreCase("no")
-						|| userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
+				}
+				else if (userInput.substring(0, 2).equalsIgnoreCase("no") || userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
 				{
 					approved = true;
 					userPiano.setIsElectric(false);
 					JOptionPane.showMessageDialog(null, "Classic");
 
-				} else
+				}
+				else
 				{
 					JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 					userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
 				}
-			} else
-			{
-				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
-				userInput = JOptionPane.showInputDialog(null, "Does it use electricity to power it?");
-			}
 		}
 
+		
 		approved = false;
 		userInput = JOptionPane.showInputDialog("Is it a grand piano?");
 		while (!approved)
@@ -96,17 +95,19 @@ public class IfController
 				{
 					approved = true;
 					userPiano.setIsGrand(true);
-				} else if (userInput.substring(0, 2).equalsIgnoreCase("no")
-						|| userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
+				}
+				else if (userInput.substring(0, 2).equalsIgnoreCase("no") || userInput.substring(0, 2).equalsIgnoreCase("na") || userInput.equalsIgnoreCase("false"))
 				{
 					approved = true;
 					userPiano.setIsGrand(false);
-				} else
+				}
+				else
 				{
 					JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 					userInput = JOptionPane.showInputDialog(null, "Is it a grand piano?");
 				}
-			} else
+			}
+			else
 			{
 				JOptionPane.showMessageDialog(null, "Please answer yes/no or true/false");
 				userInput = JOptionPane.showInputDialog(null, "Is it a grand piano?");
@@ -114,8 +115,8 @@ public class IfController
 
 		}
 
-		userInput = JOptionPane.showInputDialog(null,
-				"How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+		
+		userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 		approved = false;
 		while (!approved)
 		{
@@ -125,21 +126,23 @@ public class IfController
 				{
 					approved = true;
 
-				} else
+				}
+				else
 				{
 					JOptionPane.showMessageDialog(null, "You can't have no keys!");
-					userInput = JOptionPane.showInputDialog(null,
-							"How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+					userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 				}
-			} else
+			}
+			else
 			{
-				userInput = JOptionPane.showInputDialog(null,
-						"How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
+				userInput = JOptionPane.showInputDialog(null, "How many keys does your piano have? \n(Hint: an average piano has 88 keys)");
 			}
 		}
 		userPiano.setNumberOfKeys(Integer.parseInt(userInput));
 
 		JOptionPane.showMessageDialog(null, userPiano);
+
+		}
 	}
 
 	/**
@@ -260,14 +263,13 @@ public class IfController
 		myPianos.add(oldPiano);
 
 		// Standard forward loop
-		for (int index = 0; index < myPianos.size(); index += 1)
+		for (int index = 0; index < pianoData.size(); index += 1)
 		{
 			// Good for display, or minor changes
-			JOptionPane.showMessageDialog(null, myPianos.get(index).getBrand());
+			JOptionPane.showMessageDialog(null, pianoData.get(index).getBrand());
 
 			// Good for remove, replace, change multiple values
-			Piano currentPiano = myPianos.get(index);
-			currentPiano.setBrand("The brand is " + index);
+			Piano currentPiano = pianoData.get(index);
 
 		}
 
@@ -278,7 +280,7 @@ public class IfController
 
 		}
 
-		for (Piano current : myPianos)
+		for (Piano current : pianoData)
 		{
 			JOptionPane.showMessageDialog(null, "The piano is named: " + current.getBrand());
 		}
@@ -303,12 +305,13 @@ public class IfController
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
 				insertInput = JOptionPane.showInputDialog(null, "<WORD REPLACER>\n" + "Enter a phrase");
-			} else
+			}
+			else
 			{
 				approved = true;
 			}
 		}
-		
+
 		String originalString = insertInput;
 
 		approved = false;
@@ -316,7 +319,7 @@ public class IfController
 
 		insertInput = JOptionPane.showInputDialog(null, "[ORIGINAL: \"" + fitString(originalString) + "\"]\n" + "What do you want to replace?");
 
-		ArrayList<String> searchList = new ArrayList<String>();//list stores all words to look for
+		ArrayList<String> searchList = new ArrayList<String>();// list stores all words to look for
 
 		boolean onlyOne = true;
 		while (!approved)
@@ -329,9 +332,9 @@ public class IfController
 			}
 			else
 			{
-				boolean exception = false;//catches errors to stop loop from continuing
+				boolean exception = false;// catches errors to stop loop from continuing
 				int seperator = 0;
-				int wordCount = 1;//there will always be at least one word 
+				int wordCount = 1;// there will always be at least one word
 
 				for (int index = 0; index < insertInput.length(); index++)
 				{
@@ -353,14 +356,16 @@ public class IfController
 					searchList.add(insertInput);
 				}
 
-				// JOptionPane.showMessageDialog(null,"[DEBUG]\n" + searchList.toString() +"\nSize: " + searchList.size());
+				// JOptionPane.showMessageDialog(null,"[DEBUG]\n" + searchList.toString()
+				// +"\nSize: " + searchList.size());
 
 				int approvedWords = 0;
-				for (int element = 0; element < searchList.size(); element++)//loop repeats for each word in list
+				for (int element = 0; element < searchList.size(); element++)// loop repeats for each word in list
 				{
 					String currentWord = searchList.get(element);
 
-					// the phrase has to be of equal or less length, other wise the for loop won't work
+					// the phrase has to be of equal or less length, other wise the for loop won't
+					// work
 					if (currentWord.length() > originalString.length())
 					{
 						JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: Length exceeded original)");
@@ -388,13 +393,13 @@ public class IfController
 						}
 					}
 				}
-			
-				if (approvedWords == searchList.size())//all words have to be approved before
+
+				if (approvedWords == searchList.size())// all words have to be approved before
 				{
 					approved = true;
 				}
 
-				else if (!exception)//if none of the previous error are triggered
+				else if (!exception)// if none of the previous error are triggered
 				{
 					JOptionPane.showMessageDialog(null, "ERROR: Unable to locate, try again!" + "\n(Hint: CaSe SeNsItIvE)");
 
@@ -410,9 +415,7 @@ public class IfController
 			}
 		}
 
-		
 		// sorts list from largest to smallest length
-
 
 		if (!onlyOne)
 		{
@@ -441,14 +444,14 @@ public class IfController
 						failCount++;
 					}
 				}
-				
+
 				counter++;
-				
+
 				JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element + "\nFailCount: " + failCount);
 				if (failCount == searchList.size())
 				{
 					ordered = true;
-				JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element + "\nFailCount: " + failCount + "\nORDERED!");
+					JOptionPane.showMessageDialog(null, "[DEBUG]\n" + searchList.toString() + "\nCurrent index: " + element + "\nFailCount: " + failCount + "\nORDERED!");
 
 				}
 
@@ -464,7 +467,8 @@ public class IfController
 			if (insertInput == null)
 			{
 				JOptionPane.showMessageDialog(null, "Please enter something");
-			} else
+			}
+			else
 			{
 				approved = true;
 			}
@@ -486,10 +490,10 @@ public class IfController
 				{
 					modifiedString += insertWord;
 					// loop will now skip checking the rest of that section as it is already changed
-					index += replacePart.length();
+					index += replacePart.length()-1;
 
 				}
-
+				else
 				{
 					// if index is almost at the end of the String, then that means there's nothing
 					// left to check,so the rest doesn't need to be changed
@@ -532,18 +536,17 @@ public class IfController
 		for (int i = 0; i < inputBack.length(); i++)
 		{
 			String searchChar = inputBack.substring(i, i + 1);
-			if (searchChar.equalsIgnoreCase("a") || searchChar.equalsIgnoreCase("e") || searchChar.equalsIgnoreCase("i")
-					|| searchChar.equalsIgnoreCase("o") || searchChar.equalsIgnoreCase("u")
+			if (searchChar.equalsIgnoreCase("a") || searchChar.equalsIgnoreCase("e") || searchChar.equalsIgnoreCase("i") || searchChar.equalsIgnoreCase("o") || searchChar.equalsIgnoreCase("u")
 					|| searchChar.equalsIgnoreCase("y"))
 			{
 				vowelCount++;
-			} else if (!searchChar.equals(" "))
+			}
+			else if (!searchChar.equals(" "))
 			{
 				consonantCount++;
 			}
 		}
-		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount
-				+ " consonants in the phrase \"" + fitString(inputBack) + "\"");
+		JOptionPane.showMessageDialog(null, "There are " + vowelCount + " vowels and " + consonantCount + " consonants in the phrase \"" + fitString(inputBack) + "\"");
 
 	}
 
@@ -556,8 +559,7 @@ public class IfController
 		String outputMulti = "";
 		String changeCase = "";
 
-		String fruitInput = JOptionPane.showInputDialog(null,
-				"</WORD IMPROVER/>\n" + "Enter in the word you want to improve");
+		String fruitInput = JOptionPane.showInputDialog(null, "</WORD IMPROVER/>\n" + "Enter in the word you want to improve");
 		String multiString = fruitInput;
 		if (fruitInput == null || multiString.equals(""))
 		{
@@ -572,7 +574,8 @@ public class IfController
 			if (coinFlip.nextInt(2) == 0)
 			{
 				outputMulti += changeCase.toUpperCase() + " ";
-			} else
+			}
+			else
 			{
 				outputMulti += changeCase.toLowerCase() + " ";
 			}
@@ -595,7 +598,8 @@ public class IfController
 		{
 			Integer.parseInt(maybeInt);
 			isValid = true;
-		} catch (NumberFormatException nope)
+		}
+		catch (NumberFormatException nope)
 		{
 			JOptionPane.showMessageDialog(null, "Please enter an integer");
 		}
@@ -616,7 +620,8 @@ public class IfController
 		{
 			Double.parseDouble(maybeDouble);
 			isValid = true;
-		} catch (NumberFormatException nope)
+		}
+		catch (NumberFormatException nope)
 		{
 			JOptionPane.showMessageDialog(null, "Please enter a double");
 		}
@@ -627,11 +632,12 @@ public class IfController
 	/**
 	 * Wraps String to fit vertically
 	 * 
-
+	 * 
 	 * @param sample
 	 *            the String you want to format
-	 * @param sample the String you want to format
-
+	 * @param sample
+	 *            the String you want to format
+	 * 
 	 * @return String that is vertically formatted
 	 */
 	public String fitString(String sample)
@@ -642,7 +648,7 @@ public class IfController
 	/**
 	 * Wraps String to fit vertically
 	 * 
-
+	 * 
 	 * @param sample
 	 *            The String you want to format
 	 * @param characterLength
@@ -658,12 +664,14 @@ public class IfController
 	/**
 	 * Wraps String to fit in column rather than across the screen
 	 * 
-	 * @param sample          The String you want to format
-	 * @param characterLength How long the String should go for each line (Default:
-	 *                        140 characters)
-	 * @param splitType       Formatting type: 1 = split text with hyphen, 2 =
-	 *                        splits text with no format, 0 (default) = new line
-	 *                        after word ends
+	 * @param sample
+	 *            The String you want to format
+	 * @param characterLength
+	 *            How long the String should go for each line (Default: 140
+	 *            characters)
+	 * @param splitType
+	 *            Formatting type: 1 = split text with hyphen, 2 = splits text with
+	 *            no format, 0 (default) = new line after word ends
 	 * @return String that's vertically arranged
 	 */
 	public String fitString(String sample, int characterLength, int splitType)
@@ -675,10 +683,12 @@ public class IfController
 		if (splitType == 1)
 		{
 			splitString = "-\n";// split text with hyphen
-		} else if (splitType == 2)
+		}
+		else if (splitType == 2)
 		{
 			splitString = "\n";// splits text
-		} else
+		}
+		else
 		{
 			splitString = "\n";// splits text after word ends
 		}
@@ -697,17 +707,20 @@ public class IfController
 					smallString += splitString;
 					counter = 0;
 					smallString += sample.substring(index, index + 1);
-				} else if (counter == characterLength && sample.substring(index, index + 1).equals(" "))
+				}
+				else if (counter == characterLength && sample.substring(index, index + 1).equals(" "))
 				{
 					smallString += "\n";
 					counter = 0;
-				} else
+				}
+				else
 				{
 					counter++;
 					smallString += sample.substring(index, index + 1);
 				}
 
-			} else if (splitType != 1 && splitType != 2)
+			}
+			else if (splitType != 1 && splitType != 2)
 			{
 				if (sample.substring(index, index + 1).equals(" ") && counter > characterLength)
 				{
